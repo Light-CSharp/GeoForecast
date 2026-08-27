@@ -1,5 +1,8 @@
 ﻿namespace GeoForecast.Domain
 {
+    /// <summary>
+    /// Представляет собой столбец таблицы, состоящий из набора ячеек.
+    /// </summary>
     public class Column
     {
         private const int DefaultCellCount = 4;
@@ -7,12 +10,28 @@
 
         private readonly List<Cell> cells = CreateCells(DefaultCellCount);
 
+        /// <summary>
+        /// Получает доступную только для чтения коллекцию ячеек.
+        /// </summary>
         public IReadOnlyList<Cell> Cells => cells;
 
+        /// <summary>
+        /// Получает или устанавливает отображаемое наименование столбца.
+        /// </summary>
         public string? Name { get; set; }
 
+        /// <summary>
+        /// Добавляет новую ячейку.
+        /// </summary>
         internal void AddCell() => cells.Add(new Cell());
 
+        /// <summary>
+        /// Удаляет ячейку по указанному индексу.
+        /// </summary>
+        /// <param name="index">Индекс удаляемой ячейки.</param>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// Выбрасывается, когда <paramref name="index"/> находится вне допустимого диапазона.
+        /// </exception>
         internal void RemoveCell(int index)
         {
             if (index < 0 || index >= cells.Count)
